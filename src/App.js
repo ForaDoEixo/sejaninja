@@ -13,6 +13,8 @@ const Pink = ({children}) => (
     <em className="pink">{children}</em>
 )
 
+// 
+
 const questions = [
     {key: 'name', title: <span>Como você se <Pink>chama</Pink>?</span>},
     {key: 'email', title: <span>Qual seu <Pink>email</Pink>?</span>},
@@ -61,15 +63,19 @@ const FormWrapper = ({next, ...props}) => (
 )
 
 const formMapping = {
-  name: 'entry.276763906',
-  email: 'entry.1364339574',
-  tel: 'entry.1698681350',
+  name: 'prefill[full_name]',
+  email: 'prefill[email]',
+  tel: 'prefill[mobile]',
   city: 'entry.884182261',
   activity: 'entry.1340129654',
   motivation: 'entry.322372410',
   skills: 'entry.919281481',
   instagram: 'entry.1348441891'
 }
+
+//             ?prefill[full_name]=Fulano+de+Tal
+//             &prefill[mobile]=+5551987654321
+//             &prefill[email]=fulano@detal.net
 
 const SendData = ({next, args}) => {
   const [element, results] = args
@@ -78,8 +84,24 @@ const SendData = ({next, args}) => {
     .map(key => `${formMapping[key]}=${results[key]}`)
     .join('&')
 
+// bit.ly/PrefilledLogin - redelivre/login-cidadao
+//
+// GET /register/
+//             ?prefill[full_name]=Fulano+de+Tal
+//             &prefill[cpf]=12312312387
+//             &prefill[birthdate]=1901-01-01
+//             &prefill[mobile]=+5551987654321
+//             &prefill[email]=fulano@detal.net
+//
+// IT Works.  
+// https://id.org.br/register/?prefill[full_name]=Fulano+de+Tal&prefill[mobile]=+5551987654321&prefill[email]=fulano@detal.net
+//  
+  
+  
     console.error ('RESULTS', args)
-  const url = `https://docs.google.com/forms/d/14F27ai-E3gaBKR3ca2KFcLiU-wrBEE8wDrsAoNa328o/viewform?${params}`
+//  const url = `https://docs.google.com/forms/d/14F27ai-E3gaBKR3ca2KFcLiU-wrBEE8wDrsAoNa328o/viewform?${params}`
+    const url = `https://id.org.br/register/?${params}`
+  
   return (
       <div className='flex'>
           <h1>Valeu <Pink>{name}</Pink> de <Pink>{city}</Pink>!
