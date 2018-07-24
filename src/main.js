@@ -1,4 +1,6 @@
 'use strict'
+import gun from './gun'
+
 var util = require('./script/common/util.js')
 var Preloader = require('./script/engine/preloader.js')
 var Game = require('./script/engine/game.js')
@@ -6,7 +8,7 @@ var Renderer = require('./script/engine/renderer.js')
 var Canvas = require('./script/engine/canvas.js')
 var UI = require('./script/ui/ui.js')
 var bs = require('browser-storage')
-var ninjas = require('./ninjas.js')
+
 var Konami = require('konami')
 
 // TODO: Loading screen while preloading images, connecting to websocket, and generating world
@@ -44,59 +46,18 @@ function initWebsocket () {
   var Decorator = require('./script/props/decorator.js')
   var users, world, decorator
 
-  // var TestSocket = require('./script/engine/tester.js'),
-  //    ws = new TestSocket(50,3000);
-  const _onData = data => {
-    onData(JSON.parse(data))
-  }
-  const onData = data => {
-    if (decorator) decorator.beacon.ping()
-    if (data.type == 'server-list') {
-      game.servers = data.data
-      console.log('Got server list:', game.servers)
-      var startupServer = getStartupServer()
-      joinServer(startupServer)
-    } else if (data.type == 'server-join') { // Initial server status
-      game.reset()
-      game.renderer.clear()
-      var userList = data.data.users
-      world = new World(game, Math.round(3.3* Math.sqrt(Object.keys(userList).length)))
-      decorator = new Decorator(game, world)
-      game.decorator = decorator
-      users = new Users(game, world)
-      //      var params = '?s=' + data.data.request.server
-      //      if (data.data.request.password) params += '&p=' + data.data.request.password
-      //        if (window.location.protocol != 'file:') {
-      //        window.history.replaceState(
-      //          data.data.request, data.data.request.server, window.location.pathname + params
-      //        )
-      //      }
-      // return;
-      // console.log('Initializing actors',data.data);
-      game.setMaxListeners(Object.keys(userList).length + 50)
-      users.setMaxListeners(Object.keys(userList).length)
-      for (var uid in userList) {
-        if (!userList.hasOwnProperty(uid)) continue
-        // if(uid != '86913608335773696') continue;
-        // if(data.data[uid].status != 'online') continue;
-        if (!userList[uid].username) continue
-        const actor = users.addActor(userList[uid])
-        actor.updatePresence('online')
-        // break;
-      }
-      console.log((Object.keys(users.actors).length).toString() + ' actors created')
-      game.renderer.canvases[0].onResize()
-    } else if (data.type == 'presence') { // User status update
-      if (!users.actors[data.data.uid]) return
-      users.actors[data.data.uid].updatePresence(data.data.status)
-    } else if (data.type == 'message') { // Chatter
-      users.queueMessage(data.data)
-    } else if (data.type == 'error') {
-      window.alert(data.data.message)
-      if (!game.world) joinServer({id: 'default'})
-    } else {
-      // console.log('Websocket data:',data);
-    }
+  game.reset()
+  game.renderer.clear()
+  const userList = {}
+  const ninjas = {}
+  world = new World(game, Math.round(3.3 * Math.sqrt(32)))
+  decorator = new Decorator(game, world)
+  game.decorator = decorator
+  users = new Users(game, world)
+  game.renderer.canvases[0].onResize()
+  const addUser = (user) => {
+      if (userList.hasOwnProperty(user.uid)) return
+      const actor = users.addActor(user)
   }
 
   const hashCode = (s) => (
@@ -104,41 +65,34 @@ function initWebsocket () {
       .reduce((a, b) => { a = ((a << 2) - a) + b.charCodeAt(0); return a & a }, 0) % 0xffffff)
     .toString(16).padStart(6, '0')
 
-  const mockData = {
-    type: 'server-join',
-    data: {
-      users: ninjas.reduce((acc, cur) => (Object.assign({
-        [cur.uid]: {
-          username: '@' + cur.uid,
-          id: cur.uid,
-          link: cur.link,
-          roleColor: '#' + hashCode(cur.uid)
-        }
-      }, acc)), {}),
-      request: {}
-    }
-  }
+
+    gun.map().on((data, key) => {
+        console.error('key', key, 'data', data)
+        ninjas[key] = data
+        addUser({
+            username: '@' + key,
+            id: key,
+            link: data.link,
+            status: 'online',
+            roleColor: '#' + hashCode(key)
+        })
+    })
+
 
   const sendMessage = (ninja) => (
-    onData({
-      type: 'message',
-      data: {
-        uid: ninja.uid,
-        message: ninja.says,
-        channel: 'Ninja General'
-      }
-    })
+      ninja && users.queueMessage({
+          uid: ninja.uid,
+          message: ninja.says,
+          channel: 'Ninja General'
+      })
   )
 
-  console.error(mockData)
-  onData(mockData)
-
   setInterval(() => {
-    if (Math.random() * 10 < 8) return
+      if (Math.random() * 10 < 8) return
 
-    sendMessage(util.pickInArray(ninjas))
+      sendMessage(ninjas[util.pickInObject(ninjas)])
   }, 500)
-  setInterval(() => (onData({type: 'ping'})), 2000)
+  setInterval(() => (decorator && decorator.beacon.ping()), 2000)
 
   window.testMessage = function (message) {
     var msg = message ? message.text : 'hello, test message yo!'

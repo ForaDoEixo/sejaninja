@@ -27,7 +27,7 @@ function Beacon (x, y, z) {
   this.sprite.metrics = this.sheet.map.main
   this.flag = new Flag({x, y, z})
 }
-
+ 
 Beacon.prototype.addToGame = function (game) {
   WorldObject.prototype.addToGame.call(this, game)
   this.game.on('update', this.onUpdate.bind(this))

@@ -10,6 +10,8 @@ import main from './main'
 import logo from './img/seja-ninja.svg'
 import cube from './img/ninja.svg'
 
+import gun from './gun'
+
 const Pink = ({children}) => (
   <em className='pink'>{children}</em>
 )
@@ -100,12 +102,17 @@ const formMapping = {
 
 const SendData = ({next, args = [null, {}]}) => {
   const [element, results] = args
-  const { name, city, area, email, phone } = results
+  const { name, city, area, email, phone, instagram, motivation } = results
   const params = Object.keys(results)
     .map(key => `${formMapping[key]}=${results[key]}`)
     .join('&')
 
-  console.error('RESULTS', args)
+    gun.put({[instagram]: {
+        name: name,
+        uid: instagram,
+        says: motivation
+    }})
+    console.error ('RESULTS', args)
   const url = `https://docs.google.com/forms/d/14F27ai-E3gaBKR3ca2KFcLiU-wrBEE8wDrsAoNa328o/viewform?${params}`
   return (
       <div className='flex'>
