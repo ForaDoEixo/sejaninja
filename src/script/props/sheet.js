@@ -9,7 +9,7 @@ var map = {
     plant: {x: 36, y: 0, w: 16, h: 22, ox: 2, oy: 2},
     orb: {x: 36, y: 22, w: 8, h: 8, ox: 8, oy: 4}
   },
-  flag: {x: 6, y: 0, w: 9, h: 13, ox: 11, oy: -23}
+  flag: {x: 6, y: 0, w: 9, h: 13, ox: 5, oy: -30}
 }
 
 module.exports = Sheet

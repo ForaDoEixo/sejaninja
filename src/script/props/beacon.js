@@ -12,8 +12,8 @@ function Beacon (x, y, z) {
   WorldObject.call(this, {
     position: { x: x, y: y, z: z },
     dimentions: { w: 2, W: 1},
-    pixelSize: { x: 17, y: 18, z: 45 },
-    height: 2.5
+    pixelSize: { x: 20, y: 20, z: 45 },
+    height: 3.0
   })
   // console.log('beacon:',this.position);
   this.link = 'https://t.me/midianinja'
