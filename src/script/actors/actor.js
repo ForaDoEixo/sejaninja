@@ -30,8 +30,11 @@ function Actor (options) {
   this.presence = 'offline'
   this.talking = false
   this.destination = false
+  this.fall = 400
+  this.fallStep = 10
   this.facing = util.pickInObject(Geometry.DIRECTIONS)
   this.behaviors = []
+  setTimeout(() => this.behaviors.push(new Wander(this)), 200)
   this.boundOnMessage = this.onMessage.bind(this)
   this.roleColor = options.roleColor
   this.updateSprite()
@@ -109,6 +112,9 @@ Actor.prototype.toScreenPrecise = function () {
 }
 
 Actor.prototype.updateSprite = function () {
+  if (this.fall) {
+      this.fall -= this.fallStep
+  }
   var facing = this.facing, state = this.destination ? 'hopping' : this.presence
   if (!this.destination && this.talking) {
     state = 'online'
@@ -120,7 +126,7 @@ Actor.prototype.updateSprite = function () {
     w: this.sheet.map[state][facing].w,
     h: this.sheet.map[state][facing].h,
     ox: this.sheet.map[state][facing].ox,
-    oy: this.sheet.map[state][facing].oy
+    oy: this.sheet.map[state][facing].oy - this.fall
   }
   if (!this.destination && this.talking) {
     metrics.y += (Math.floor(this.game.ticks / 4) % 4) * metrics.h
