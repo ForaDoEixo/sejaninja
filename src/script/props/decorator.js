@@ -57,7 +57,7 @@ Decorator.prototype.createBeacon = function () {
   // var beaconLocation = beaconLocations[beaconLocationKeys[0]];
   // beaconLocation.position = { x: 0, y: 0, z: 0 };
   this.beacon = new Beacon(
-      {sheet: 'ninja'},
+      {sheet: 'ninja', flag: true},
       0, 0, 0
   )
   this.beacon.addToGame(this.game)
