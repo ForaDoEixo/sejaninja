@@ -113,7 +113,7 @@ Actor.prototype.toScreenPrecise = function () {
 
 Actor.prototype.updateSprite = function () {
   if (this.fall) {
-      this.fall -= this.fallStep
+    this.fall -= this.fallStep
   }
   var facing = this.facing, state = this.destination ? 'hopping' : this.presence
   if (!this.destination && this.talking) {

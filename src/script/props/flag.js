@@ -35,7 +35,7 @@ Flag.prototype.addToGame = function (game) {
 }
 
 Flag.prototype.grow = function () {
-  this.growStage = (this.growStage + 1)%3
+  this.growStage = (this.growStage + 1) % 3
   var metrics = JSON.parse(JSON.stringify(this.sheet.map))
   metrics.x += this.sprite.metrics.w * this.growStage
   this.sprite.metrics = metrics

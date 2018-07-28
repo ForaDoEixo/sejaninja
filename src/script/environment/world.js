@@ -269,13 +269,13 @@ World.prototype.addToWorld = function (obj) {
   }
   this.objects[obj.position.x][obj.position.y][obj.position.z] = obj
   if (obj.dimentions) {
-      for (var x = obj.position.x; x++; x < obj.position.x + obj.dimentions.w) {
-          for (var y = obj.position.y; y++; y < obj.position.y + obj.dimentions.W) {
-              this.updateWalkable(x, y, -1)
-          }
+    for (var x = obj.position.x; x++; x < obj.position.x + obj.dimentions.w) {
+      for (var y = obj.position.y; y++; y < obj.position.y + obj.dimentions.W) {
+        this.updateWalkable(x, y, -1)
       }
+    }
   } else {
-      this.updateWalkable(obj.position.x, obj.position.y)
+    this.updateWalkable(obj.position.x, obj.position.y)
   }
 }
 
@@ -294,8 +294,8 @@ World.prototype.moveObject = function (obj, x, y, z) {
 
 World.prototype.updateWalkable = function (x, y, hint) {
   if (hint) {
-      // hint really is go away
-      return delete this.walkable[ x + ':' + y ]
+    // hint really is go away
+    return delete this.walkable[ x + ':' + y ]
   }
   // console.log('world: updating walkable at',x,y);
   var objects = this.objects[x][y]
