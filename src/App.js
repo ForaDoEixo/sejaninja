@@ -7,7 +7,6 @@ import './css/main.css'
 import './css/form.css'
 import main from './main'
 
-import logo from './img/seja-ninja.svg'
 import cube from './img/ninja.svg'
 
 const Pink = ({children}) => (
@@ -142,7 +141,6 @@ class App extends Component {
 
       <div className='App'>
         <div id='hero'>
-          <img className='sejalogo' src={logo} />
           <Details />
         </div>
 
