@@ -58,13 +58,13 @@ class FormWrapper extends React.Component {
 
   render () {
     const {next, ...props} = this.props
-    const {values, current} = this.state
-    const remaining = <Number value={8 - current - 1} />
+    const {values, current, questionsCount} = this.state
+    const remaining = <Number value={questionsCount - current - 1} />
     console.error('state', this.state)
     return (
       <div className='flex'>
         <h1 className='caps'>Responda {
-          8 - current - 2
+          questionsCount - current - 2
             ? <span>estas {remaining} perguntinhas </span>
             : <span>esta ultima preguntinha </span> }
                 para que possamos te conhecer melhor e entrar em contato :)
