@@ -1,11 +1,11 @@
 'use strict'
 
-const cubicInOut = (t, b = 0, c = 25 , d = 50) => {
-	t /= d/2;
-	if (t < 1) return c/2*t*t*t*t + b;
-	t -= 2;
-	return -c/2 * (t*t*t*t - 2) + b;
-};
+const cubicInOut = (t, b = 0, c = 25, d = 50) => {
+  t /= d / 2
+  if (t < 1) return c / 2 * t * t * t * t + b
+  t -= 2
+  return -c / 2 * (t * t * t * t - 2) + b
+}
 
 const animate = (se) => (t) => cubicInOut(t, se.s, se.e - se.s)
 const bounds = (min, max) => (v) => v < min ? min : v > max ? max : v
@@ -16,11 +16,18 @@ var map = {
     light: {x: 0, y: 0, w: 5, h: 4, ox: 13, oy: 13}
   },
   seja: {
-      main: {x: 44, y: 0, w: 179, h: 100, ox: 0, oy: 0},
-      shade: {x: 225, y: 3, w: 20, h: 30,
-              mask: {x: bounds(112, 175) , y: y => y},
-              ox: animate({s: 172, e: 98}),
-              oy: animate({s: 14, e: 77})},
+    main: {x: 44, y: 0, w: 179, h: 100, ox: 0, oy: 0},
+    shade: {x: 225,
+      y: 3,
+      w: 20,
+      h: 30,
+      mask: {x: bounds(112, 175), y: y => y},
+      ox: animate({s: 172, e: 98}),
+      oy: animate({s: 14, e: 77})},
+    shade1: {x: 237, y: 5, w: 8, h: 24, ox: (t) => 175 - t, oy: (t) => 24},
+    shade2: {x: 237, y: 5, w: 8, h: 24, ox: 150, oy: 42},
+    shade3: {x: 237, y: 5, w: 8, h: 24, ox: 112, oy: 76}
+
   },
   seed: {
     plant: {x: 36, y: 0, w: 16, h: 22, ox: 2, oy: 2},

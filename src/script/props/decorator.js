@@ -57,13 +57,13 @@ Decorator.prototype.createBeacon = function () {
   // var beaconLocation = beaconLocations[beaconLocationKeys[0]];
   // beaconLocation.position = { x: 0, y: 0, z: 0 };
   this.beacon = new Beacon(
-      {sheet: 'ninja', flag: true},
-      0, 0, 0
+    {sheet: 'ninja', flag: true, hover: true},
+    0, 0, 0
   )
   this.beacon.addToGame(this.game)
   this.seja = new Beacon(
-      {sheet: 'seja'},
-      -20, -10, -10
+    {sheet: 'seja'},
+    -20, -10, -10
   )
   this.seja.addToGame(this.game)
 }
