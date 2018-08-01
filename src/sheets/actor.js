@@ -20,10 +20,10 @@ const map = {
 }
 
 for (let i = 0; i < 13; i++) {
-    map['hopping_north' + i] = Object.assign(map.hopping_north, {x: i*map.hopping_north.w})
-    map['hopping_south' + i] = Object.assign(map.hopping_south, {x: i*map.hopping_south.w})
-    map['hopping_east' + i] = Object.assign(map.hopping_east, {x: i*map.hopping_east.w})
-    map['hopping_west' + i] = Object.assign(map.hopping_west, {x: i*map.hopping_west.w})
+    map['hopping_north' + i] = Object.assign({}, map.hopping_north, {x: i*map.hopping_north.w})
+    map['hopping_south' + i] = Object.assign({}, map.hopping_south, {x: i*map.hopping_south.w})
+    map['hopping_east'  + i] = Object.assign({}, map.hopping_east, {x: i*map.hopping_east.w})
+    map['hopping_west'  + i] = Object.assign({}, map.hopping_west, {x: i*map.hopping_west.w})
 }
 
 module.exports = map

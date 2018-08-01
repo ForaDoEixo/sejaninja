@@ -65,13 +65,26 @@ const pixi = () => {
         }
         console.log(terrain)
         drawMap(terrain, WIDTH / 8);
-        
-        const actor = new Actor(cache.get('actor'), {
-            mood: 'hopping',
-            x: 5,
-            y: 10
-        })
-        stage.addChild(actor.sprite) 
+
+        const addActor = (opts) => {
+            const actor = new Actor(cache.get('actor'), Object.assign({}, {
+                mood: 'hopping',
+            }, opts))
+            
+            stage.addChild(actor.sprite) 
+        }
+        addActor({x: 200, y: 100})
+
+            setTimeout(() => {        
+        for (let i = 0; i < 100; i++) {
+
+                addActor({
+                    x: Math.floor(Math.random()*350), 
+                    y: Math.floor(Math.random()*250),
+                    tint: Math.floor(Math.random()*0xFFFFFF),
+                })
+        }
+            }, Math.random()*500)
     }
 
     PIXI.loader    
