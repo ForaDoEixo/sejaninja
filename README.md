@@ -4,6 +4,9 @@ This code is based on https://github.com/vegeta897/d-zone and https://github.com
 
 This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
 
+![GitHub](https://img.shields.io/github/license/ForaDoEixo/sejaninja.svg)
+[![chatroom icon](https://patrolavia.github.io/telegram-badge/chat.png)](https://t.me/joinchat/AEg1Xw3xF4onH7jo4dZT5Q)
+
 ![Screenshot](./screenshots/screenshot-1.png)
 ![Screenshot](./screenshots/screenshot-mobile-0.png)
 
