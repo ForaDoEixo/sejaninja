@@ -33,7 +33,7 @@ class Stepper extends React.PureComponent {
 
     return (
       <div>
-        {clonedChild}
+          {clonedChild}
       </div>
     )
   }
@@ -41,9 +41,9 @@ class Stepper extends React.PureComponent {
 
 const Number = ({value}) => (
   <ul className='questions show-next rollingNumber'>
-    <li className='next' key={value + 1}>{value + 1}</li>
-    <li className='current' key={value}>{value}</li>
-    <li className='prev' key={value - 1}>{value - 1}</li>
+      <li className='next' key={value + 1}>{value + 1}</li>
+      <li className='current' key={value}>{value}</li>
+      <li className='prev' key={value - 1}>{value - 1}</li>
   </ul>
 )
 
@@ -62,76 +62,80 @@ class FormWrapper extends React.Component {
     const remaining = <Number value={questionsCount - current - 1} />
     console.error('state', this.state)
     return (
-      <div className='flex'>
+    <div className='flex'>
         <h1 className='caps'>Responda {
           questionsCount - current - 2
-            ? <span>estas {remaining} perguntinhas </span>
-            : <span>esta ultima preguntinha </span> }
-                para que possamos te conhecer melhor e entrar em contato :)
+          ? <span>estas {remaining} perguntinhas </span>
+          : <span>esta ultima preguntinha </span> }
+            para que possamos te conhecer melhor e entrar em contato :)
         </h1>)
-        <EurekaForm id='contact' autoFocus
-          onSubmit={next} onUpdate={(state) => this.setState(state)}>
-          <span type='name'>Nos diga seu <Pink>nome :)</Pink></span>
-          <span type='email'>Oi <Pink>{values.name}</Pink>, agora seu <Pink>email</Pink></span>
-          <span type='tel'>E <Pink>telefone</Pink></span>
-          <span type='city'>Qual <Pink>cidade</Pink>, <Pink>estado</Pink>, <Pink>país</Pink> você vive?</span>
-          <span type='motivation'>Você quer ser <Pink>ninja</Pink> porque...</span>
-          <span type='skills'>E o que você gostaria de<Pink> fazer e colaborar</Pink>?</span>
-          <span type='instagram'>Manda seu <Pink>insta</Pink> pra gente colocar no mapa 8)</span>
-          <span type='info'>Existe alguma <Pink>informação adicional</Pink> que nos gostaria de enviar?</span>
-        </EurekaForm>
-      </div>
-    )
+    <EurekaForm id='contact' autoFocus
+                onSubmit={next} onUpdate={(state) => this.setState(state)}>
+        <span type='name'>Nos diga seu <Pink>nome completo</Pink>:)</span>
+        { /* <span type='email'>Oi <Pink>{values.name}</Pink>, agora seu <Pink>email</Pink></span> */}
+        <span type='tel'>Oi <Pink>{values.name}</Pink>, agora seu <Pink>Telefone e zap</Pink></span>
+        <span type='city'>Qual <Pink>cidade</Pink>, <Pink>estado</Pink>, <Pink>país</Pink> você vive?</span>
+        <span type='motivation'>Você quer ser <Pink>ninja</Pink> porque...</span>
+        { /* <span type='skills'>E o que você gostaria de<Pink> fazer e colaborar</Pink>?</span> */ }
+        <span type='redes'>Manda suas redes pra gente colocar no mapa 8) <Pink>insta</Pink>, <Pink>face</Pink> e <Pink>twitter</Pink> pra gente? *</span>
+        <span type='portfolio'>Compartilha um link do seu <Pink>portifólio</Pink>, <Pink>blog</Pink>, ou <Pink>página</Pink> com seus trabalhos</span>
+        <span type='instagram'>Manda seu <Pink>insta</Pink> pra gente colocar no mapa 8)</span>
+        <span type='info'>Existe alguma <Pink>informação adicional</Pink> que nos gostaria de registrar?</span>
+    </EurekaForm>
+    </div>
+)
   }
 }
 
 const formMapping = {
-  name: 'entry.276763906',
+  name: 'entry.1714540534',
   email: 'entry.1364339574',
-  tel: 'entry.1698681350',
-  city: 'entry.884182261',
+  tel: 'entry.719084075',
+  city: 'entry.247091769',
   activity: 'entry.1340129654',
-  motivation: 'entry.322372410',
+  motivation: 'entry.1138207460',
   skills: 'entry.919281481',
+  redes: 'entry.1646905508',
+  portfolio: 'entry.1718014338',
   instagram: 'entry.1348441891',
-  info: 'entry.161867977'
+  info: 'entry.1545677716'
 }
 
 const SendData = ({next, args = [null, {}]}) => {
   const [element, results] = args
   const { name, city, area, email, phone } = results
   const params = Object.keys(results)
-    .map(key => `${formMapping[key]}=${results[key]}`)
-    .join('&')
+                       .map(key => `${formMapping[key]}=${results[key]}`)
+                       .join('&')
 
   console.error('RESULTS', args)
-  const url = `https://docs.google.com/forms/d/14F27ai-E3gaBKR3ca2KFcLiU-wrBEE8wDrsAoNa328o/viewform?${params}`
+  const url = `https://docs.google.com/forms/d/e/1FAIpQLSc389hSURTyHJu9kU0nhweSL9Jas1cdCd5SyEfGnDWglrFwVQ/viewform?${params}`
   return (
     <div className='flex'>
-      <div>
-        <h1>Valeu <Pink>{name}</Pink> de <Pink>{city}</Pink>!</h1>
-        <button className='desktop pink' onClick={() => window.open(url)}>
-                  Confirme aqui seu cadastro
+        <div>
+            <h1>Valeu <Pink>{name}</Pink> de <Pink>{city}</Pink>!</h1>
+            <button className='desktop pink' onClick={() => window.open(url)}>
+                Confirme aqui seu cadastro
+            </button>
+        </div>
+        <div style={{flex: 2}}>
+            <img className='cube' src={cube} />
+            <h1 className='connected'>agora estamos conectados, <br />
+                a partir do dia <Pink>10 de agosto</Pink> iniciaremos os
+                contatos com cada um dos cadastrados, qualquer dúvida pode
+                sempre entrar em <Pink>contato conosco</Pink>.</h1>
+        </div>
+        <button className='mobile pink' onClick={() => window.open(url)}>
+            Confirme aqui seu cadastro
         </button>
-      </div>
-      <div style={{flex: 2}}>
-        <img className='cube' src={cube} />
-        <h1 className='connected'>agora estamos conectados, <br />
-                  a partir do dia <Pink>10 de agosto</Pink> iniciaremos os
-                  contatos com cada um dos cadastrados, qualquer dúvida pode
-                  sempre entrar em <Pink>contato conosco</Pink>.</h1>
-      </div>
-      <button className='mobile pink' onClick={() => window.open(url)}>
-              Confirme aqui seu cadastro
-      </button>
     </div>
   )
 }
 
 const Details = () => (
   <Stepper>
-    <FormWrapper />
-    <SendData />
+      <FormWrapper />
+      <SendData />
   </Stepper>
 )
 
@@ -140,9 +144,9 @@ class App extends Component {
     return (
 
       <div className='App'>
-        <div id='hero'>
-          <Details />
-        </div>
+          <div id='hero'>
+              <Details />
+          </div>
 
       </div>)
   }
