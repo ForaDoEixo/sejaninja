@@ -68,7 +68,7 @@ class FormWrapper extends React.Component {
           ? <span>estas {remaining} perguntinhas </span>
           : <span>esta ultima preguntinha </span> }
             para que possamos te conhecer melhor e entrar em contato :)
-        </h1>)
+        </h1>
     <EurekaForm id='contact' autoFocus
                 onSubmit={next} onUpdate={(state) => this.setState(state)}>
         <span type='name'>Nos diga seu <Pink>nome completo</Pink>:)</span>
@@ -77,7 +77,7 @@ class FormWrapper extends React.Component {
         <span type='city'>Qual <Pink>cidade</Pink>, <Pink>estado</Pink>, <Pink>país</Pink> você vive?</span>
         <span type='motivation'>Você quer ser <Pink>ninja</Pink> porque...</span>
         { /* <span type='skills'>E o que você gostaria de<Pink> fazer e colaborar</Pink>?</span> */ }
-        <span type='redes'>Manda suas redes <Pink>insta</Pink>, <Pink>face</Pink> e <Pink>twitter</Pink>8)</span>
+        <span type='redes'>Manda suas redes <Pink>insta</Pink>, <Pink>face</Pink> e <Pink>twitter</Pink> 8)</span>
         <span type='portfolio'>Compartilha um link do seu <Pink>portifólio</Pink>, <Pink>blog</Pink>, ou <Pink>página</Pink> com seus trabalhos</span>
         { /* <span type='instagram'>Manda seu <Pink>insta</Pink> pra gente colocar no mapa 8)</span> */ }
         <span type='info'>Existe alguma <Pink>informação adicional</Pink> que nos gostaria de registrar?</span>
