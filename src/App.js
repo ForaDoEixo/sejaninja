@@ -73,13 +73,13 @@ class FormWrapper extends React.Component {
                 onSubmit={next} onUpdate={(state) => this.setState(state)}>
         <span type='name'>Nos diga seu <Pink>nome completo</Pink>:)</span>
         { /* <span type='email'>Oi <Pink>{values.name}</Pink>, agora seu <Pink>email</Pink></span> */}
-        <span type='tel'>Oi <Pink>{values.name}</Pink>, agora seu <Pink>Telefone e zap</Pink></span>
+        <span type='fone'>Oi <Pink>{values.name}</Pink>, agora seu <Pink>Telefone e zap</Pink></span>
         <span type='city'>Qual <Pink>cidade</Pink>, <Pink>estado</Pink>, <Pink>país</Pink> você vive?</span>
         <span type='motivation'>Você quer ser <Pink>ninja</Pink> porque...</span>
         { /* <span type='skills'>E o que você gostaria de<Pink> fazer e colaborar</Pink>?</span> */ }
-        <span type='redes'>Manda suas redes pra gente colocar no mapa 8) <Pink>insta</Pink>, <Pink>face</Pink> e <Pink>twitter</Pink> pra gente? *</span>
+        <span type='redes'>Manda suas redes <Pink>insta</Pink>, <Pink>face</Pink> e <Pink>twitter</Pink>8)</span>
         <span type='portfolio'>Compartilha um link do seu <Pink>portifólio</Pink>, <Pink>blog</Pink>, ou <Pink>página</Pink> com seus trabalhos</span>
-        <span type='instagram'>Manda seu <Pink>insta</Pink> pra gente colocar no mapa 8)</span>
+        { /* <span type='instagram'>Manda seu <Pink>insta</Pink> pra gente colocar no mapa 8)</span> */ }
         <span type='info'>Existe alguma <Pink>informação adicional</Pink> que nos gostaria de registrar?</span>
     </EurekaForm>
     </div>
@@ -90,7 +90,7 @@ class FormWrapper extends React.Component {
 const formMapping = {
   name: 'entry.1714540534',
   email: 'entry.1364339574',
-  tel: 'entry.719084075',
+  fone: 'entry.719084075',
   city: 'entry.247091769',
   activity: 'entry.1340129654',
   motivation: 'entry.1138207460',
