@@ -120,15 +120,13 @@ const SendData = ({next, args = [null, {}]}) => {
         </div>
         <div style={{flex: 2}}>
             <img className='cube' src={cube} />
-            <h1 className='connected'>agora estamos conectados, <br />
-                a partir do dia <Pink>10 de agosto</Pink> iniciaremos os
-                contatos com cada um dos cadastrados, qualquer dúvida pode
-                sempre entrar em <Pink>contato conosco</Pink>.</h1>
-        </div>
-        <button className='mobile pink' onClick={() => window.open(url)}>
-            Confirme aqui seu cadastro
-        </button>
-    </div>
+            <h1 className='connected'>Agora estamos conectados ! <br />
+                Em breve entramos em contato! Qualquer dúvida entra em contato pelo <Pink><a href="mailto://midianinja@gmail.com">midianinja@gmail.com</a></Pink>.</h1>
+                </div>
+                <button className='mobile pink' onClick={() => window.open(url)}>
+                Confirme aqui seu cadastro
+                </button>
+                </div>
   )
 }
 
